@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.time.LocalDateTime;
 import java.util.Base64;
 
 @Service
@@ -18,7 +19,7 @@ public class UrlService {
     public String shortenUrl(String originalUrl) {
         try {
             
-            //Using First 8 digits of MD5 hash (Apparently SHA-256 is more secure? Double the size also)
+            //Using First 8 digits of MD5 hash (Considered SHA-256)
             MessageDigest md = MessageDigest.getInstance("MD5");
             byte[] digest = md.digest(originalUrl.getBytes());
             String base64 = Base64.getUrlEncoder().encodeToString(digest);
@@ -27,7 +28,7 @@ public class UrlService {
             Url url = new Url();
             url.setOriginalUrl(originalUrl);
             url.setShortUrl(shortUrl);
-            url.setCreatedAt(System.currentTimeMillis());
+            url.setCreatedAt(LocalDateTime.now());;
             
             urlRepository.save(url);
             return shortUrl;

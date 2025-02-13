@@ -1,5 +1,7 @@
 package com.sohamh.urlshortener.Model;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.Data;
@@ -12,6 +14,6 @@ public class Url {
     @Id
     private String shortUrl;
     private String originalUrl;
-    private long createdAt;
+    private LocalDateTime createdAt;
 }
 
